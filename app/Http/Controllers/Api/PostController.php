@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PostRequest;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Storage;
@@ -27,18 +28,9 @@ class PostController extends Controller
         //return collection of posts as a resource
         return new PostResource(true, 'List Data Post', $post);
     }
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-        $validator = Validator::make(request()->all(), [
-            'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
-            'title' => 'required|min:5',
-            'content' => 'required|min:10',
-        ]);
-
-        if($validator->fails())
-        {
-            return response()->json($validator->errors(), 422);
-        }
+        
 
         $image = $request->file('image');
         $image->storeAs('public/posts', $image->hashName());
