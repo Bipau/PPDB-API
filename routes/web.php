@@ -36,12 +36,15 @@ Route::delete('pendaftaran/{id}',[CalonSiswaController::class,'destroy'])->name(
 
 
 //route data panitia
-Route::get('panitia/index',[PanitiaController::class,'index'])->name('panitia.index');
-Route::get('panitia/create',[PanitiaController::class,'create'])->name('panitia.create');
-Route::post('panitia/store',[PanitiaController::class,'store'])->name('panitia.store');
-Route::get('panitia/{id}',[PanitiaController::class,'view'])->name('panitia.view');
-Route::get('panitia/edit/{id}',[PanitiaController::class,'edit'])->name('panitia.edit');
-Route::delete('panitia/{id}',[PanitiaController::class,'destroy'])->name('panitia.destroy');
+Route::prefix('panitia')->group(function () {
+    Route::get('index', [PanitiaController::class, 'index'])->name('panitia.index');
+    Route::get('create', [PanitiaController::class, 'create'])->name('panitia.create');
+    Route::post('store', [PanitiaController::class, 'store'])->name('panitia.store');
+    Route::get('{id}', [PanitiaController::class, 'show'])->name('panitia.show');
+    Route::get('edit/{id}', [PanitiaController::class, 'edit'])->name('panitia.edit');
+    Route::delete('{id}', [PanitiaController::class, 'destroy'])->name('panitia.destroy');
+});
+
 
 
 
