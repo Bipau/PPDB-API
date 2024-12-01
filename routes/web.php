@@ -9,12 +9,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 
-Route::get('/Dashboard', [DashboardController::class, 'show']);
+Route::get('/', [DashboardController::class, 'show']);
 
 Route::get('/Profile', [ProfileController::class, 'index']);
 
